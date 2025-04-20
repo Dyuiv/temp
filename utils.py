@@ -48,7 +48,20 @@ class mws_gpt_alpha(BaseLLM):
         return "mws_gpt_alpha"
 
 
+def db_init():
+    POSTGRES_USER = os.getenv("POSTGRES_USER")
+    POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_DB = os.getenv("POSTGRES_DB")
+    POSTGRES_HOST = os.getenv("POSTGRES_HOST")
+    POSTGRES_PORT = os.getenv("POSTGRES_PORT")
 
+    engine = create_engine(
+        f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}",
+    )
+    from models import Base 
+    Base.metadata.create_all(bind=engine)
+    SessionFactory = sessionmaker(bind=engine, class_=Session, expire_on_commit=False)
+    return SessionFactory
 
 
 # def get_embedding(text):

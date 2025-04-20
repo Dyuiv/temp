@@ -9,7 +9,7 @@ from tqdm import tqdm
 # 2) Конфигурация Qdrant
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", None)
-collection_name = "support_intents"
+collection_name = "support_intents_labels"
 
 # Подключаемся к Qdrant
 client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
@@ -52,9 +52,10 @@ for rec in tqdm(records, desc="Embedding intents"):
 
     # Объединяем name и content для генерации эмбеддинга
     combined_text = f"{name} {content}".strip()  # Удаляем лишние пробелы, если content пуст
+    only_label = f"{name}"
 
     # Генерация эмбеддинга на объединенном тексте
-    vector = model.encode(combined_text, convert_to_numpy=True).tolist()
+    vector = model.encode(only_label, convert_to_numpy=True).tolist()
 
     # Подготовка payload (без изменений)
     payload = {
