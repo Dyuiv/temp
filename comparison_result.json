@@ -1,0 +1,28 @@
+Нужно реализовать еще 2 цепочки:
+1) цепочка для анализа фраз консультанта(включается, каждый раз когда приходит дорожка консультанта)
+    quality asurance agent(семантический поиск по загруженному документу или запрос в LLM)
+    emotion agent
+    action suggestion agent
+
+2) цепочка для анализа всего диалога:
+    crm agent
+        5. Пример конечной записи в CRM
+        Для диалога о проблеме с интернетом система может сгенерировать:
+
+json
+{
+    "customer_issue": "проблемы с подключением к интернету",
+    "issue_category": "connectivity",
+    "priority": "high",
+    "solution_provided": "Проверить кабель, перезагрузить роутер",
+    "effectiveness_score": 4,
+    "followup_required": true,
+    "customer_sentiment": "frustrated",
+    "key_phrases": ["интернет", "роутер", "перезагрузка"],
+    "internal_notes": "Клиенту помогла визуальная инструкция - добавить в базу знаний",
+    "call_metrics": {
+        "duration": 245,
+        "interruptions": 2
+    }
+}
+    summariation agent()
